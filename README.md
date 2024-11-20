@@ -7,6 +7,7 @@ Dedicated documentation on the setting up of Linux OS locally.
 ssh-keygen -t rsa -b 4096 -C "unique-key-identifier" -f ~/.ssh/id_rsa
 eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
+ssh -T git@github.com
 ```
 
 ## Install dependencies
