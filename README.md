@@ -1,41 +1,36 @@
 # Linux-Setup
 Dedicated documentation on the setting up of Linux OS locally.
-mkdir ~/RC
 
-# Create ssh key 
-ssh-keygen -t rsa -b 4096 -C "<your-retail-capital-email-address>" -f ~/.ssh/id_rsa
+## Create ssh key 
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "unique-key-identifier" -f ~/.ssh/id_rsa
 eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
+```
 
+## Install dependencies
+
+```bash
 sudo apt update
 sudo apt upgrade -y
+sudo apt install zsh git python3-pip -y
+```
 
-# Install zsh
-sudo apt install zsh -y
+## Install oh-my-zsh (Pretty Terminal)
 
-# Install oh-my-zsh
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# Set zsh as default shell
 chsh -s $(which zsh)
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
 
-# Install pip
-sudo apt install python3-pip
+# Configure Github
 
-# Install pipenv
-# This is used to create a new, isolated environment for each project that you start
-pip install pipenv
-
-# Add pipenv auto-activation to .zshrc
-echo 'eval "$(pipenv --completion)"' >> ~/.zshrc
-echo 'pipenv shell' >> ~/.zshrc
-
-# Ensure that our line ending characters are the same whether on Windows or Linux
+```bash
 git config --global core.autocrlf input
 git config --global core.eol lf
-
-# Ensure that SSH is always used
+git config --global user.email # email@example.com
+git config --global user.name # name-surname
 git config --global url."git@github.com:".insteadOf "https://github.com/"
-
-# Install the Powerlevel 10K theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
